@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mosha Library MOCU v10 ULTIMATE - Premium + Manjonjo</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+--primary: #6d28d9;
+--primary-dark: #5b21b6;
+--secondary: #0ea5e9;
+--accent: #f59e0b;
+--bg: #0f172a;
+--bg-light: #1e293b;
+--text: #f1f5f9;
+--text-muted: #94a3b8;
+--card: #1e293b;
+--border: #334155;
+--success: #10b981;
+--danger: #ef4444;
+--shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+--glow: 0 0 40px rgba(109, 40, 217, 0.5);
+}
+.light {
+--bg: #f8fafc;
+--bg-light: #ffffff;
+--text: #0f172a;
+--text-muted: #475569;
+--card: #ffffff;
+--border: #e2e8f0;
+--shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+--glow: 0 0 40px rgba(109, 40, 217, 0.2);
+}
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: 'Manrope', sans-serif;
+background: var(--bg);
+color: var(--text);
+transition: background 0.4s ease, color 0.4s ease;
+overflow-x: hidden;
+}
+h1, h2, h3, h4, h5, h6 {
+font-family: 'Outfit', sans-serif;
+}
+.glass {
+background: rgba(30, 41, 59, 0.6);
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.light .glass {
+background: rgba(255, 255, 255, 0.7);
+border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.gradient-text {
+background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+}
+.gradient-bg {
+background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+}
+.hero-bg {
+background: radial-gradient(circle at 20% 50%, rgba(109, 40, 217, 0.15) 0%, transparent 50%),
+radial-gradient(circle at 80% 80%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
+radial-gradient(circle at 40% 20%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+}
+#particles-canvas {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 0;
+}
+.typewriter-cursor {
+display: inline-block;
+width: 3px;
+height: 1em;
+background: var(--primary);
+animation: blink 1s infinite;
+margin-left: 4px;
+}
+@keyframes blink {
+0%, 50% { opacity: 1; }
+51%, 100% { opacity: 0; }
+}
+.skeleton {
+background: linear-gradient(90deg, var(--card) 25%, var(--bg-light) 50%, var(--card) 75%);
+background-size: 200% 100%;
+animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer {
+0% { background-position: 200% 0; }
+100% { background-position: -200% 0; }
+}
+.card-3d {
+transform-style: preserve-3d;
+transform: perspective(1000px);
+transition: transform 0.1s ease;
+}
+.card-3d:hover {
+box-shadow: var(--glow), var(--shadow);
+}
+.card-3d::before {
+content: '';
+position: absolute;
+inset: 0;
+background: linear-gradient(135deg, rgba(109, 40, 217, 0.1), rgba(14, 165, 233, 0.1));
+opacity: 0;
+transition: opacity 0.3s ease;
+border-radius: inherit;
+pointer-events: none;
+}
+.card-3d:hover::before {
+opacity: 1;
+}
+.ripple {
+position: relative;
+overflow: hidden;
+}
+.ripple-effect {
+position: absolute;
+border-radius: 50%;
+background: rgba(255, 255, 255, 0.6);
+transform: scale(0);
+animation: ripple-animation 0.6s ease-out;
+pointer-events: none;
+}
+@keyframes ripple-animation {
+to {
+transform: scale(4);
+opacity: 0;
+}
+}
+.chip-pulse {
+animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes pulse {
+0%, 100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.8; transform: scale(1.05); }
+}
+.toast {
+animation: slideIn 0.3s ease-out, slideOut 0.3s ease-in 2.7s forwards;
+}
+@keyframes slideIn {
+from { transform: translateX(400px); opacity: 0; }
+to { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideOut {
+to { transform: translateX(400px); opacity: 0; }
+}
+.fab-expand {
+animation: fabAppear 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes fabAppear {
+from { transform: scale(0) rotate(-180deg); opacity: 0; }
+to { transform: scale(1) rotate(0); opacity: 1; }
+}
+.modal-enter {
+animation: modalFadeIn 0.3s ease-out;
+}
+@keyframes modalFadeIn {
+from { opacity: 0; transform: scale(0.9); }
+to { opacity: 1; transform: scale(1); }
+}
+.search-highlight {
+background: rgba(245, 158, 11, 0.3);
+padding: 0 2px;
+border-radius: 2px;
+font-weight: 600;
+}
+.autocomplete-item:hover {
+background: var(--bg-light);
+}
+.page-transition {
+animation: pageEnter 0.4s ease-out;
+}
+@keyframes pageEnter {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.toggle-switch {
+width: 60px;
+height: 32px;
+background: var(--border);
+border-radius: 16px;
+position: relative;
+cursor: pointer;
+transition: background 0.3s ease;
+}
+.toggle-switch.active {
+background: var(--primary);
+}
+.toggle-knob {
+width: 26px;
+height: 26px;
+background: white;
+border-radius: 50%;
+position: absolute;
+top: 3px;
+left: 3px;
+transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.toggle-switch.active .toggle-knob {
+transform: translateX(28px);
+}
+.counter-animate {
+transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.mobile-nav {
+backdrop-filter: blur(20px);
+-webkit-backdrop-filter: blur(20px);
+}
+.scrollbar-hide::-webkit-scrollbar {
+display: none;
+}
+.scrollbar-hide {
+-ms-overflow-style: none;
+scrollbar-width: none;
+}
+@media (max-width: 768px) {
+.hero-title { font-size: 2.5rem !important; }
+}
+</style>
+</head>
+<body class="min-h-screen">
+<div id="toast-container" class="fixed top-4 right-4 z-[9999] space-y-2"></div>
+<div id="modal-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-[9998] hidden"></div>
+
+<header class="sticky top-0 z-50 glass border-b border-[var(--border)]">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-20">
+<div id="logo" class="flex items-center gap-3 cursor-pointer select-none">
+<div class="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center shadow-lg">
+<i class="fas fa-book-open text-white text-xl"></i>
+</div>
+<div>
+<h1 class="text-xl font-bold gradient-text">Mosha Library</h1>
+<p class="text-xs text-[var(--text-muted)]">MOCU v10 ULTIMATE</p>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<nav class="flex items-center gap-6">
+<a href="#home" class="text-[var(--text)] hover:text-[var(--primary)] transition font-medium">Home</a>
+<a href="#library" class="text-[var(--text)] hover:text-[var(--primary)] transition font-medium">Library</a>
+<a href="#contact" class="text-[var(--text)] hover:text-[var(--primary)] transition font-medium">Contact</a>
+</nav>
+<div class="relative">
+<button id="lang-btn" class="flex items-center gap-2 px-4 py-2 rounded-lg glass hover:border-[var(--primary)] border border-[var(--border)] transition">
+<span id="current-flag" class="text-xl">🇬🇧</span>
+<span id="current-lang" class="text-sm font-medium">EN</span>
+<i class="fas fa-chevron-down text-xs"></i>
+</button>
+<div id="lang-dropdown" class="absolute right-0 mt-2 w-48 glass rounded-xl border border-[var(--border)] shadow-xl hidden">
+<div class="p-2 space-y-1 max-h-80 overflow-y-auto scrollbar-hide">
+</div>
+</div>
+</div>
+<div id="theme-toggle" class="toggle-switch">
+<div class="toggle-knob">
+<i id="theme-icon" class="fas fa-moon text-xs text-[var(--primary)]"></i>
+</div>
+</div>
+</div>
+<button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg glass">
+<i class="fas fa-bars text-xl"></i>
+</button>
+</div>
+</div>
+</header>
+
+<div id="mobile-menu" class="fixed inset-0 z-40 hidden">
+<div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="mobile-menu-backdrop"></div>
+<div class="absolute right-0 top-0 h-full w-80 glass border-l border-[var(--border)] p-6 space-y-6">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-xl font-bold">Menu</h3>
+<button id="mobile-menu-close" class="p-2"><i class="fas fa-times text-xl"></i></button>
+</div>
+<nav class="space-y-4">
+<a href="#home" class="block py-3 px-4 rounded-lg hover:bg-[var(--bg-light)] transition">Home</a>
+<a href="#library" class="block py-3 px-4 rounded-lg hover:bg-[var(--bg-light)] transition">Library</a>
+<a href="#contact" class="block py-3 px-4 rounded-lg hover:bg-[var(--bg-light)] transition">Contact</a>
+</nav>
+<div class="pt-6 border-t border-[var(--border)] space-y-4">
+<p class="text-sm text-[var(--text-muted)]">Theme</p>
+<div id="mobile-theme-toggle" class="toggle-switch">
+<div class="toggle-knob">
+<i id="mobile-theme-icon" class="fas fa-moon text-xs text-[var(--primary)]"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<section id="home" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden hero-bg">
+<canvas id="particles-canvas"></canvas>
+<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center page-transition">
+<div class="inline-block px-4 py-2 rounded-full glass border border-[var(--border)] mb-6">
+<span class="text-sm font-medium text-[var(--text-muted)]">
+<i class="fas fa-star text-[var(--accent)] mr-2"></i>
+Premium Digital Library Experience
+</span>
+</div>
+<h1 class="hero-title text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+<span id="typewriter" class="gradient-text"></span>
+<span class="typewriter-cursor"></span>
+</h1>
+<p class="text-xl md:text-2xl text-[var(--text-muted)] max-w-3xl mx-auto mb-10">
+Access thousands of documents, books, and resources. Built for MOCU students with Premium + Manjonjo experience.
+</p>
+<div class="flex flex-wrap items-center justify-center gap-6 mb-12">
+<div class="glass rounded-2xl px-8 py-5 border border-[var(--border)]">
+<div class="text-4xl font-bold gradient-text counter-animate" id="total-docs">0</div>
+<div class="text-sm text-[var(--text-muted)] mt-1">Total Documents</div>
+</div>
+<div class="glass rounded-2xl px-8 py-5 border border-[var(--border)]">
+<div class="text-4xl font-bold gradient-text counter-animate" id="total-downloads">0</div>
+<div class="text-sm text-[var(--text-muted)] mt-1">Downloads</div>
+</div>
+<div class="glass rounded-2xl px-8 py-5 border border-[var(--border)]">
+<div class="text-4xl font-bold gradient-text counter-animate" id="active-users">0</div>
+<div class="text-sm text-[var(--text-muted)] mt-1">Active Users</div>
+</div>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-4">
+<a href="#library" class="ripple px-8 py-4 rounded-xl gradient-bg text-white font-semibold shadow-lg hover:shadow-xl transition transform hover:scale-105">
+<i class="fas fa-rocket mr-2"></i>Explore Library
+</a>
+<a href="#contact" class="ripple px-8 py-4 rounded-xl glass border border-[var(--border)] font-semibold hover:border-[var(--primary)] transition">
+<i class="fas fa-phone mr-2"></i>Contact Us
+</a>
+</div>
+</div>
+</section>
+
+<section id="library" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+<div class="mb-12">
+<h2 class="text-4xl md:text-5xl font-bold mb-4 text-center">
+<span class="gradient-text">Document Library</span>
+</h2>
+<p class="text-center text-[var(--text-muted)] text-lg">Search, filter, and download resources instantly</p>
+</div>
+
+<div class="mb-8 space-y-4">
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<i class="fas fa-search text-[var(--text-muted)]"></i>
+</div>
+<input 
+type="text" 
+id="search-input" 
+placeholder="Search documents, authors, categories..." 
+class="w-full pl-12 pr-4 py-4 rounded-xl glass border border-[var(--border)] focus:border-[var(--primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/20 transition text-lg">
+<div id="autocomplete-box" class="absolute z-30 w-full mt-2 glass rounded-xl border border-[var(--border)] shadow-xl hidden max-h-80 overflow-y-auto">
+</div>
+</div>
+
+<div class="flex items-center gap-3 overflow-x-auto scrollbar-hide pb-2">
+<button class="category-chip chip-pulse ripple px-6 py-3 rounded-xl glass border border-[var(--border)] font-medium whitespace-nowrap transition active" data-category="all">
+<i class="fas fa-border-all mr-2"></i>All
+</button>
+<button class="category-chip ripple px-6 py-3 rounded-xl glass border border-[var(--border)] font-medium whitespace-nowrap transition" data-category="books">
+<i class="fas fa-book mr-2"></i>Books
+</button>
+<button class="category-chip ripple px-6 py-3 rounded-xl glass border border-[var(--border)] font-medium whitespace-nowrap transition" data-category="notes">
+<i class="fas fa-sticky-note mr-2"></i>Notes
+</button>
+<button class="category-chip ripple px-6 py-3 rounded-xl glass border border-[var(--border)] font-medium whitespace-nowrap transition" data-category="papers">
+<i class="fas fa-file-alt mr-2"></i>Papers
+</button>
+<button class="category-chip ripple px-6 py-3 rounded-xl glass border border-[var(--border)] font-medium whitespace-nowrap transition" data-category="slides">
+<i class="fas fa-presentation mr-2"></i>Slides
+</button>
+<button class="category-chip ripple px-6 py-3 rounded-xl glass border border-[var(--border)] font-medium whitespace-nowrap transition" data-category="other">
+<i class="fas fa-folder mr-2"></i>Other
+</button>
+</div>
+</div>
+
+<div id="loading-skeleton" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="glass rounded-2xl border border-[var(--border)] p-6">
+<div class="skeleton h-48 rounded-xl mb-4"></div>
+<div class="skeleton h-6 rounded mb-3 w-3/4"></div>
+<div class="skeleton h-4 rounded mb-2 w-1/2"></div>
+<div class="skeleton h-4 rounded w-full"></div>
+</div>
+<div class="glass rounded-2xl border border-[var(--border)] p-6">
+<div class="skeleton h-48 rounded-xl mb-4"></div>
+<div class="skeleton h-6 rounded mb-3 w-3/4"></div>
+<div class="skeleton h-4 rounded mb-2 w-1/2"></div>
+<div class="skeleton h-4 rounded w-full"></div>
+</div>
+<div class="glass rounded-2xl border border-[var(--border)] p-6">
+<div class="skeleton h-48 rounded-xl mb-4"></div>
+<div class="skeleton h-6 rounded mb-3 w-3/4"></div>
+<div class="skeleton h-4 rounded mb-2 w-1/2"></div>
+<div class="skeleton h-4 rounded w-full"></div>
+</div>
+</div>
+
+<div id="documents-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
+</div>
+
+<div id="empty-state" class="hidden text-center py-20">
+<svg class="w-64 h-64 mx-auto mb-6" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="40" y="50" width="120" height="140" rx="8" stroke="var(--primary)" stroke-width="3" stroke-dasharray="8 8" opacity="0.3"/>
+<circle cx="100" cy="100" r="30" stroke="var(--secondary)" stroke-width="3" fill="none" opacity="0.3"/>
+<path d="M100 85V115M85 100H115" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+<path d="M60 130H140" stroke="var(--text-muted)" stroke-width="2" opacity="0.2"/>
+<path d="M60 145H130" stroke="var(--text-muted)" stroke-width="2" opacity="0.2"/>
+<path d="M60 160H120" stroke="var(--text-muted)" stroke-width="2" opacity="0.2"/>
+</svg>
+<h3 class="text-2xl font-bold mb-2">No Documents Found</h3>
+<p class="text-[var(--text-muted)] mb-6">Try adjusting your search or filters</p>
+<button id="clear-filters" class="ripple px-6 py-3 rounded-xl gradient-bg text-white font-semibold">
+<i class="fas fa-redo mr-2"></i>Clear Filters
+</button>
+</div>
+</section>
+
+<section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="text-4xl md:text-5xl font-bold mb-4">
+<span class="gradient-text">Get In Touch</span>
+</h2>
+<p class="text-[var(--text-muted)] text-lg">Contact us for support or contributions</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<a href="tel:0793770731" class="glass rounded-2xl border border-[var(--border)] p-6 hover:border-[var(--primary)] transition text-center group">
+<div class="w-16 h-16 rounded-xl gradient-bg mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition">
+<i class="fas fa-phone text-white text-2xl"></i>
+</div>
+<h3 class="font-bold mb-2">Phone</h3>
+<p class="text-[var(--text-muted)] text-sm">0793770731</p>
+</a>
+<a href="mailto:kingshamo47@gmail.com" class="glass rounded-2xl border border-[var(--border)] p-6 hover:border-[var(--primary)] transition text-center group">
+<div class="w-16 h-16 rounded-xl gradient-bg mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition">
+<i class="fas fa-envelope text-white text-2xl"></i>
+</div>
+<h3 class="font-bold mb-2">Email</h3>
+<p class="text-[var(--text-muted)] text-sm break-all">kingshamo47@gmail.com</p>
+</a>
+<a href="https://wa.me/255793770731" target="_blank" class="glass rounded-2xl border border-[var(--border)] p-6 hover:border-[var(--primary)] transition text-center group">
+<div class="w-16 h-16 rounded-xl gradient-bg mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition">
+<i class="fab fa-whatsapp text-white text-2xl"></i>
+</div>
+<h3 class="font-bold mb-2">WhatsApp</h3>
+<p class="text-[var(--text-muted)] text-sm">Chat Now</p>
+</a>
+<a href="https://www.tiktok.com/@jay019410" target="_blank" class="glass rounded-2xl border border-[var(--border)] p-6 hover:border-[var(--primary)] transition text-center group">
+<div class="w-16 h-16 rounded-xl gradient-bg mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition">
+<i class="fab fa-tiktok text-white text-2xl"></i>
+</div>
+<h3 class="font-bold mb-2">TikTok</h3>
+<p class="text-[var(--text-muted)] text-sm">@jay019410</p>
+</a>
+</div>
+</section>
+
+<footer id="footer" class="py-12 px-4 border-t border-[var(--border)] mt-20">
+<div class="max-w-7xl mx-auto text-center">
+<div class="flex items-center justify-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center">
+<i class="fas fa-book-open text-white"></i>
+</div>
+<p class="font-bold text-lg gradient-text">Mosha Library MOCU v10</p>
+</div>
+<p class="text-[var(--text-muted)] text-sm mb-4">Premium + Manjonjo Experience • Built with Love</p>
+<p class="text-[var(--text-muted)] text-xs">© 2024 All Rights Reserved</p>
+</div>
+</footer>
+
+<div id="admin-fab" class="fixed bottom-24 md:bottom-8 right-6 z-40 hidden">
+<button id="fab-main" class="fab-expand w-16 h-16 rounded-full gradient-bg shadow-2xl flex items-center justify-center text-white hover:scale-110 transition">
+<i class="fas fa-crown text-2xl"></i>
+</button>
+<div id="fab-menu" class="hidden absolute bottom-20 right-0 space-y-3">
+<button id="upload-btn" class="w-14 h-14 rounded-full glass border border-[var(--border)] flex items-center justify-center hover:border-[var(--primary)] transition group">
+<i class="fas fa-cloud-upload-alt text-[var(--primary)] text-xl group-hover:scale-110 transition"></i>
+</button>
+<button id="logout-btn" class="w-14 h-14 rounded-full glass border border-[var(--border)] flex items-center justify-center hover:border-[var(--danger)] transition group">
+<i class="fas fa-sign-out-alt text-[var(--danger)] text-xl group-hover:scale-110 transition"></i>
+</button>
+</div>
+</div>
+
+<div id="upload-modal" class="fixed inset-0 z-[9999] hidden items-center justify-center p-4">
+<div class="glass rounded-2xl border border-[var(--border)] max-w-2xl w-full modal-enter">
+<div class="p-6 border-b border-[var(--border)] flex items-center justify-between">
+<h3 class="text-2xl font-bold">Upload Document</h3>
+<button class="modal-close p-2 hover:bg-[var(--bg-light)] rounded-lg transition">
+<i class="fas fa-times text-xl"></i>
+</button>
+</div>
+<form id="upload-form" class="p-6 space-y-4">
+<div>
+<label class="block text-sm font-medium mb-2">Document Title *</label>
+<input type="text" id="doc-title" required class="w-full px-4 py-3 rounded-xl glass border border-[var(--border)] focus:border-[var(--primary)] focus:outline-none transition">
+</div>
+<div>
+<label class="block text-sm font-medium mb-2">Author</label>
+<input type="text" id="doc-author" class="w-full px-4 py-3 rounded-xl glass border border-[var(--border)] focus:border-[var(--primary)] focus:outline-none transition">
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium mb-2">Category *</label>
+<select id="doc-category" required class="w-full px-4 py-3 rounded-xl glass border border-[var(--border)] focus:border-[var(--primary)] focus:outline-none transition">
+<option value="">Select Category</option>
+<option value="books">Books</option>
+<option value="notes">Notes</option>
+<option value="papers">Papers</option>
+<option value="slides">Slides</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium mb-2">Language *</label>
+<select id="doc-language" required class="w-full px-4 py-3 rounded-xl glass border border-[var(--border)] focus:border-[var(--primary)] focus:outline-none transition">
+<option value="">Select Language</option>
+<option value="en">English</option>
+<option value="sw">Swahili</option>
+<option value="fr">French</option>
+<option value="ar">Arabic</option>
+<option value="zh">Chinese</option>
+<option value="es">Spanish</option>
+<option value="pt">Portuguese</option>
+<option value="hi">Hindi</option>
+<option value="de">German</option>
+<option value="ru">Russian</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium mb-2">Description</label>
+<textarea id="doc-description" rows="3" class="w-full px-4 py-3 rounded-xl glass border border-[var(--border)] focus:border-[var(--primary)] focus:outline-none transition resize-none"></textarea>
+</div>
+<div>
+<label class="block text-sm font-medium mb-2">Chagua kutoka Gallery *</label>
+<div class="relative">
+<input type="file" id="doc-file" required accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt" class="hidden">
+<label for="doc-file" class="flex items-center justify-center w-full px-4 py-6 rounded-xl glass border-2 border-dashed border-[var(--border)] hover:border-[var(--primary)] cursor-pointer transition">
+<div class="text-center">
+<i class="fas fa-cloud-upload-alt text-3xl text-[var(--primary)] mb-2"></i>
+<p class="font-medium">Click to upload or drag and drop</p>
+<p class="text-sm text-[var(--text-muted)]">PDF, DOC, PPT, XLS, TXT (Max 50MB)</p>
+<p id="file-name" class="text-sm text-[var(--primary)] mt-2 font-medium"></p>
+</div>
+</label>
+</div>
+</div>
+<button type="submit" id="submit-upload" class="ripple w-full py-4 rounded-xl gradient-bg text-white font-semibold hover:shadow-lg transition">
+<i class="fas fa-upload mr-2"></i>Upload Document
+</button>
+</form>
+</div>
+</div>
+
+<div id="admin-login-modal" class="fixed inset-0 z-[9999] hidden items-center justify-center p-4">
+<div class="glass rounded-2xl border border-[var(--border)] max-w-md w-full modal-enter">
+<div class="p-6 border-b border-[var(--border)]">
+<h3 class="text-2xl font-bold">Admin Access</h3>
+<p class="text-sm text-[var(--text-muted)] mt-1">Enter password to continue</p>
+</div>
+<form id="admin-login-form" class="p-6 space-y-4">
+<div>
+<label class="block text-sm font-medium mb-2">Password</label>
+<input type="password" id="admin-password" required class="w-full px-4 py-3 rounded-xl glass border border-[var(--border)] focus:border-[var(--primary)] focus:outline-none transition" placeholder="Enter admin password">
+</div>
+<button type="submit" class="ripple w-full py-4 rounded-xl gradient-bg text-white font-semibold">
+<i class="fas fa-lock-open mr-2"></i>Unlock Admin Panel
+</button>
+</form>
+</div>
+</div>
+
+<nav class="mobile-nav fixed bottom-0 left-0 right-0 glass border-t border-[var(--border)] md:hidden z-40">
+<div class="flex items-center justify-around py-3">
+<a href="#home" class="flex flex-col items-center gap-1 px-4 py-2 text-[var(--text)]">
+<i class="fas fa-home text-xl"></i>
+<span class="text-xs">Home</span>
+</a>
+<a href="#library" class="flex flex-col items-center gap-1 px-4 py-2 text-[var(--text)]">
+<i class="fas fa-book text-xl"></i>
+<span class="text-xs">Library</span>
+</a>
+<a href="#contact" class="flex flex-col items-center gap-1 px-4 py-2 text-[var(--text)]">
+<i class="fas fa-phone text-xl"></i>
+<span class="text-xs">Contact</span>
+</a>
+<button id="mobile-admin-btn" class="flex flex-col items-center gap-1 px-4 py-2 text-[var(--text)]">
+<i class="fas fa-user-shield text-xl"></i>
+<span class="text-xs">Admin</span>
+</button>
+</div>
+</nav>
+
+<script>
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlrxcDtozAbfGOARTXso62g91EnUKfWggZogcsgJZynFWJjfmdQXIIA2u2UnfMUnYGww/exec';
+const ADMIN_PASSWORD = 'baraka0793770731';
+
+const LANGUAGES = [
+{ code: 'en', name: 'English', flag: '🇬🇧' },
+{ code: 'sw', name: 'Swahili', flag: '🇹🇿' },
+{ code: 'fr', name: 'French', flag: '🇫🇷' },
+{ code: 'ar', name: 'Arabic', flag: '🇸🇦' },
+{ code: 'zh', name: 'Chinese', flag: '🇨🇳' },
+{ code: 'es', name: 'Spanish', flag: '🇪🇸' },
+{ code: 'pt', name: 'Portuguese', flag: '🇵🇹' },
+{ code: 'hi', name: 'Hindi', flag: '🇮🇳' },
+{ code: 'de', name: 'German', flag: '🇩🇪' },
+{ code: 'ru', name: 'Russian', flag: '🇷🇺' }
+];
+
+let documents = [];
+let filteredDocuments = [];
+let currentCategory = 'all';
+let currentLanguage = 'all';
+let isAdmin = false;
+let logoPressTimer = null;
+let footerTaps = 0;
+let footerTapTimer = null;
+let keySequence = '';
+let fabOpen = false;
+
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+}
+
+class Particle {
+constructor() {
+this.x = Math.random() * canvas.width;
+this.y = Math.random() * canvas.height;
+this.size = Math.random() * 2 + 0.5;
+this.speedX = Math.random() * 0.5 - 0.25;
+this.speedY = Math.random() * 0.5 - 0.25;
+this.opacity = Math.random() * 0.5 + 0.2;
+}
+update() {
+this.x += this.speedX;
+this.y += this.speedY;
+if (this.x > canvas.width) this.x = 0;
+if (this.x < 0) this.x = canvas.width;
+if (this.y > canvas.height) this.y = 0;
+if (this.y < 0) this.y = canvas.height;
+}
+draw() {
+ctx.fillStyle = `rgba(109, 40, 217, ${this.opacity})`;
+ctx.beginPath();
+ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+ctx.fill();
+}
+}
+
+function initParticles() {
+resizeCanvas();
+particles = [];
+for (let i = 0; i < 100; i++) {
+particles.push(new Particle());
+}
+}
+
+function animateParticles() {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+particles.forEach(particle => {
+particle.update();
+particle.draw();
+});
+for (let i = 0; i < particles.length; i++) {
+for (let j = i + 1; j < particles.length; j++) {
+const dx = particles[i].x - particles[j].x;
+const dy = particles[i].y - particles[j].y;
+const distance = Math.sqrt(dx * dx + dy * dy);
+if (distance < 100) {
+ctx.strokeStyle = `rgba(109, 40, 217, ${0.1 * (1 - distance / 100)})`;
+ctx.lineWidth = 0.5;
+ctx.beginPath();
+ctx.moveTo(particles[i].x, particles[i].y);
+ctx.lineTo(particles[j].x, particles[j].y);
+ctx.stroke();
+}
+}
+}
+requestAnimationFrame(animateParticles);
+}
+
+const typewriterTexts = [
+'Mosha Library MOCU v10',
+'Premium + Manjonjo Experience',
+'Your Digital Knowledge Hub',
+'Access Unlimited Resources'
+];
+let textIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function typeWriter() {
+const currentText = typewriterTexts[textIndex];
+const typewriterEl = document.getElementById('typewriter');
+if (isDeleting) {
+typewriterEl.textContent = currentText.substring(0, charIndex - 1);
+charIndex--;
+} else {
+typewriterEl.textContent = currentText.substring(0, charIndex + 1);
+charIndex++;
+}
+let typeSpeed = isDeleting ? 50 : 100;
+if (!isDeleting && charIndex === currentText.length) {
+typeSpeed = 2000;
+isDeleting = true;
+} else if (isDeleting && charIndex === 0) {
+isDeleting = false;
+textIndex = (textIndex + 1) % typewriterTexts.length;
+typeSpeed = 500;
+}
+setTimeout(typeWriter, typeSpeed);
+}
+
+function animateCounter(id, target, duration = 2000) {
+const el = document.getElementById(id);
+const start = 0;
+const increment = target / (duration / 16);
+let current = start;
+const timer = setInterval(() => {
+current += increment;
+if (current >= target) {
+el.textContent = target.toLocaleString();
+clearInterval(timer);
+} else {
+el.textContent = Math.floor(current).toLocaleString();
+}
+}, 16);
+}
+
+function showToast(message, type = 'success') {
+const container = document.getElementById('toast-container');
+const toast = document.createElement('div');
+const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-times-circle' : 'fa-info-circle';
+const color = type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--danger)' : 'var(--secondary)';
+toast.className = 'toast glass rounded-xl border border-[var(--border)] px-6 py-4 flex items-center gap-3 min-w-[300px]';
+toast.innerHTML = `
+<i class="fas ${icon} text-xl" style="color: ${color}"></i>
+<p class="font-medium">${message}</p>
+`;
+container.appendChild(toast);
+setTimeout(() => toast.remove(), 3000);
+}
+
+function addRippleEffect(e) {
+const button = e.currentTarget;
+const ripple = document.createElement('span');
+const rect = button.getBoundingClientRect();
+const size = Math.max(rect.width, rect.height);
+const x = e.clientX - rect.left - size / 2;
+const y = e.clientY - rect.top - size / 2;
+ripple.style.width = ripple.style.height = size + 'px';
+ripple.style.left = x + 'px';
+ripple.style.top = y + 'px';
+ripple.classList.add('ripple-effect');
+button.appendChild(ripple);
+setTimeout(() => ripple.remove(), 600);
+}
+
+function showModal(modalId) {
+document.getElementById('modal-overlay').classList.remove('hidden');
+document.getElementById(modalId).classList.remove('hidden');
+document.getElementById(modalId).classList.add('flex');
+}
+
+function hideModal(modalId) {
+document.getElementById('modal-overlay').classList.add('hidden');
+document.getElementById(modalId).classList.add('hidden');
+document.getElementById(modalId).classList.remove('flex');
+}
+
+function toggleTheme() {
+document.body.classList.toggle('light');
+const isLight = document.body.classList.contains('light');
+localStorage.setItem('theme', isLight ? 'light' : 'dark');
+updateThemeIcon();
+}
+
+function updateThemeIcon() {
+const isLight = document.body.classList.contains('light');
+const icons = document.querySelectorAll('#theme-icon, #mobile-theme-icon');
+const switches = document.querySelectorAll('#theme-toggle, #mobile-theme-toggle');
+icons.forEach(icon => {
+icon.className = isLight ? 'fas fa-sun text-xs text-[var(--accent)]' : 'fas fa-moon text-xs text-[var(--primary)]';
+});
+switches.forEach(sw => {
+if (isLight) sw.classList.add('active');
+else sw.classList.remove('active');
+});
+}
+
+function checkAdminUnlock() {
+if (isAdmin) return;
+showModal('admin-login-modal');
+}
+
+function unlockAdmin() {
+isAdmin = true;
+document.getElementById('admin-fab').classList.remove('hidden');
+hideModal('admin-login-modal');
+showToast('Admin panel unlocked successfully', 'success');
+renderDocuments();
+}
+
+function logoutAdmin() {
+isAdmin = false;
+document.getElementById('admin-fab').classList.add('hidden');
+document.getElementById('fab-menu').classList.add('hidden');
+fabOpen = false;
+showToast('Logged out from admin panel', 'info');
+renderDocuments();
+}
+
+function toggleFab() {
+fabOpen = !fabOpen;
+const menu = document.getElementById('fab-menu');
+if (fabOpen) {
+menu.classList.remove('hidden');
+} else {
+menu.classList.add('hidden');
+}
+}
+
+async function fetchDocuments() {
+try {
+const response = await fetch(APPS_SCRIPT_URL);
+const data = await response.json();
+if (data.success) {
+documents = data.documents || [];
+filteredDocuments = [...documents];
+updateStats();
+renderDocuments();
+document.getElementById('loading-skeleton').classList.add('hidden');
+document.getElementById('documents-grid').classList.remove('hidden');
+}
+} catch (error) {
+console.error('Error fetching documents:', error);
+showToast('Failed to load documents', 'error');
+document.getElementById('loading-skeleton').classList.add('hidden');
+document.getElementById('empty-state').classList.remove('hidden');
+}
+}
+
+async function fetchStats() {
+try {
+const response = await fetch(`${APPS_SCRIPT_URL}?action=stats`);
+const data = await response.json();
+if (data.success && data.stats) {
+animateCounter('total-docs', data.stats.totalDocs || 0);
+animateCounter('total-downloads', data.stats.totalDownloads || 0);
+animateCounter('active-users', data.stats.activeUsers || 0);
+}
+} catch (error) {
+console.error('Error fetching stats:', error);
+}
+}
+
+function updateStats() {
+const stats = {
+totalDocs: documents.length,
+totalDownloads: documents.reduce((sum, doc) => sum + (doc.downloads || 0), 0),
+activeUsers: Math.floor(documents.length * 2.5)
+};
+animateCounter('total-docs', stats.totalDocs);
+animateCounter('total-downloads', stats.totalDownloads);
+animateCounter('active-users', stats.activeUsers);
+}
+
+function renderDocuments() {
+const grid = document.getElementById('documents-grid');
+const emptyState = document.getElementById('empty-state');
+if (filteredDocuments.length === 0) {
+grid.classList.add('hidden');
+emptyState.classList.remove('hidden');
+return;
+}
+grid.classList.remove('hidden');
+emptyState.classList.add('hidden');
+const searchTerm = document.getElementById('search-input').value.toLowerCase();
+grid.innerHTML = filteredDocuments.map(doc => {
+const highlightedTitle = searchTerm ? doc.title.replace(new RegExp(searchTerm, 'gi'), match => `<span class="search-highlight">${match}</span>`) : doc.title;
+const highlightedAuthor = searchTerm && doc.author ? doc.author.replace(new RegExp(searchTerm, 'gi'), match => `<span class="search-highlight">${match}</span>`) : doc.author;
+const categoryIcons = {
+books: 'fa-book',
+notes: 'fa-sticky-note',
+papers: 'fa-file-alt',
+slides: 'fa-presentation',
+other: 'fa-folder'
+};
+const lang = LANGUAGES.find(l => l.code === doc.language);
+return `
+<div class="card-3d glass rounded-2xl border border-[var(--border)] p-6 relative group" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+<div class="absolute top-4 right-4 flex gap-2 z-10">
+<span class="px-3 py-1 rounded-lg glass border border-[var(--border)] text-xs font-medium">
+${lang ? lang.flag : ''} ${lang ? lang.name : doc.language}
+</span>
+</div>
+<div class="mb-4 mt-8">
+<div class="w-16 h-16 rounded-xl gradient-bg flex items-center justify-center mb-4 group-hover:scale-110 transition">
+<i class="fas ${categoryIcons[doc.category] || 'fa-file'} text-white text-2xl"></i>
+</div>
+<h3 class="text-xl font-bold mb-2 line-clamp-2">${highlightedTitle}</h3>
+${doc.author ? `<p class="text-sm text-[var(--text-muted)] mb-2"><i class="fas fa-user mr-1"></i> ${highlightedAuthor}</p>` : ''}
+<p class="text-sm text-[var(--text-muted)] line-clamp-2 mb-4">${doc.description || 'No description available'}</p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-[var(--border)]">
+<div class="flex items-center gap-4 text-sm text-[var(--text-muted)]">
+<span><i class="fas fa-download mr-1"></i> ${doc.downloads || 0}</span>
+<span><i class="fas fa-calendar mr-1"></i> ${new Date(doc.uploadDate).toLocaleDateString()}</span>
+</div>
+<div class="flex items-center gap-2">
+<a href="${doc.fileUrl}" target="_blank" class="ripple px-4 py-2 rounded-lg gradient-bg text-white text-sm font-medium hover:shadow-lg transition" onclick="incrementDownload('${doc.id}')">
+<i class="fas fa-download mr-1"></i>Download
+</a>
+${isAdmin ? `
+<button onclick="deleteDocument('${doc.id}')" class="ripple px-3 py-2 rounded-lg glass border border-[var(--danger)] text-[var(--danger)] text-sm hover:bg-[var(--danger)] hover:text-white transition">
+<i class="fas fa-trash"></i>
+</button>
+` : ''}
+</div>
+</div>
+</div>
+`;
+}).join('');
+if (typeof VanillaTilt !== 'undefined') {
+VanillaTilt.init(document.querySelectorAll('.card-3d'), {
+max: 5,
+speed: 400,
+glare: true,
+'max-glare': 0.2
+});
+}
+}
+
+async function incrementDownload(docId) {
+try {
+await fetch(APPS_SCRIPT_URL, {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ action: 'incrementDownload', docId })
+});
+const doc = documents.find(d => d.id === docId);
+if (doc) doc.downloads = (doc.downloads || 0) + 1;
+updateStats();
+} catch (error) {
+console.error('Error incrementing download:', error);
+}
+}
+
+async function deleteDocument(docId) {
+if (!confirm('Are you sure you want to delete this document? This will remove it from Drive and Sheet.')) return;
+try {
+showToast('Deleting document...', 'info');
+const response = await fetch(APPS_SCRIPT_URL, {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ action: 'delete', docId })
+});
+const data = await response.json();
+if (data.success) {
+documents = documents.filter(d => d.id !== docId);
+filterDocuments();
+showToast('Document deleted successfully', 'success');
+} else {
+showToast('Failed to delete document', 'error');
+}
+} catch (error) {
+console.error('Error deleting document:', error);
+showToast('Error deleting document', 'error');
+}
+}
+
+function filterDocuments() {
+const searchTerm = document.getElementById('search-input').value.toLowerCase();
+filteredDocuments = documents.filter(doc => {
+const matchesSearch = !searchTerm || 
+doc.title.toLowerCase().includes(searchTerm) ||
+(doc.author && doc.author.toLowerCase().includes(searchTerm)) ||
+(doc.description && doc.description.toLowerCase().includes(searchTerm)) ||
+doc.category.toLowerCase().includes(searchTerm);
+const matchesCategory = currentCategory === 'all' || doc.category === currentCategory;
+const matchesLanguage = currentLanguage === 'all' || doc.language === currentLanguage;
+return matchesSearch && matchesCategory && matchesLanguage;
+});
+renderDocuments();
+updateAutocomplete(searchTerm);
+}
+
+function updateAutocomplete(searchTerm) {
+const box = document.getElementById('autocomplete-box');
+if (!searchTerm || searchTerm.length < 2) {
+box.classList.add('hidden');
+return;
+}
+const suggestions = documents
+.filter(doc => doc.title.toLowerCase().includes(searchTerm))
+.slice(0, 5);
+if (suggestions.length === 0) {
+box.classList.add('hidden');
+return;
+}
+box.innerHTML = suggestions.map(doc => `
+<div class="autocomplete-item px-4 py-3 cursor-pointer border-b border-[var(--border)] last:border-0" data-title="${doc.title}">
+<div class="flex items-center gap-3">
+<i class="fas fa-search text-[var(--text-muted)]"></i>
+<div>
+<p class="font-medium">${doc.title}</p>
+<p class="text-xs text-[var(--text-muted)]">${doc.author || 'Unknown'} • ${doc.category}</p>
+</div>
+</div>
+</div>
+`).join('');
+box.classList.remove('hidden');
+box.querySelectorAll('.autocomplete-item').forEach(item => {
+item.addEventListener('click', () => {
+document.getElementById('search-input').value = item.dataset.title;
+box.classList.add('hidden');
+filterDocuments();
+});
+});
+}
+
+async function handleUpload(e) {
+e.preventDefault();
+const submitBtn = document.getElementById('submit-upload');
+const originalText = submitBtn.innerHTML;
+submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Uploading...';
+submitBtn.disabled = true;
+try {
+const fileInput = document.getElementById('doc-file');
+const file = fileInput.files[0];
+if (!file) throw new Error('No file selected');
+const reader = new FileReader();
+reader.onload = async (e) => {
+const base64 = e.target.result.split(',')[1];
+const payload = {
+action: 'upload',
+title: document.getElementById('doc-title').value,
+author: document.getElementById('doc-author').value,
+category: document.getElementById('doc-category').value,
+language: document.getElementById('doc-language').value,
+description: document.getElementById('doc-description').value,
+fileName: file.name,
+fileData: base64,
+fileType: file.type
+};
+try {
+const response = await fetch(APPS_SCRIPT_URL, {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify(payload)
+});
+const data = await response.json();
+if (data.success) {
+confetti({
+particleCount: 100,
+spread: 70,
+origin: { y: 0.6 },
+colors: ['#6d28d9', '#0ea5e9', '#f59e0b']
+});
+showToast('Document uploaded successfully!', 'success');
+hideModal('upload-modal');
+document.getElementById('upload-form').reset();
+document.getElementById('file-name').textContent = '';
+await fetchDocuments();
+} else {
+showToast(data.message || 'Upload failed', 'error');
+}
+} catch (error) {
+console.error('Upload error:', error);
+showToast('Error uploading document', 'error');
+} finally {
+submitBtn.innerHTML = originalText;
+submitBtn.disabled = false;
+}
+};
+reader.readAsDataURL(file);
+} catch (error) {
+console.error('File read error:', error);
+showToast('Error reading file', 'error');
+submitBtn.innerHTML = originalText;
+submitBtn.disabled = false;
+}
+}
+
+function initLanguages() {
+const dropdown = document.querySelector('#lang-dropdown .p-2');
+dropdown.innerHTML = LANGUAGES.map(lang => `
+<button class="w-full text-left px-4 py-2 rounded-lg hover:bg-[var(--bg-light)] transition flex items-center gap-3" data-lang="${lang.code}" data-flag="${lang.flag}">
+<span class="text-xl">${lang.flag}</span>
+<span class="font-medium">${lang.name}</span>
+</button>
+`).join('');
+dropdown.querySelectorAll('button').forEach(btn => {
+btn.addEventListener('click', () => {
+const lang = btn.dataset.lang;
+const flag = btn.dataset.flag;
+document.getElementById('current-flag').textContent = flag;
+document.getElementById('current-lang').textContent = lang.toUpperCase();
+currentLanguage = lang;
+document.getElementById('lang-dropdown').classList.add('hidden');
+filterDocuments();
+});
+});
+}
+
+function initEventListeners() {
+document.querySelectorAll('.ripple').forEach(el => {
+el.addEventListener('click', addRippleEffect);
+});
+document.getElementById('lang-btn').addEventListener('click', (e) => {
+e.stopPropagation();
+document.getElementById('lang-dropdown').classList.toggle('hidden');
+});
+document.addEventListener('click', () => {
+document.getElementById('lang-dropdown').classList.add('hidden');
+document.getElementById('autocomplete-box').classList.add('hidden');
+});
+document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+document.getElementById('mobile-theme-toggle').addEventListener('click', toggleTheme);
+document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+document.getElementById('mobile-menu').classList.remove('hidden');
+});
+document.getElementById('mobile-menu-close').addEventListener('click', () => {
+document.getElementById('mobile-menu').classList.add('hidden');
+});
+document.getElementById('mobile-menu-backdrop').addEventListener('click', () => {
+document.getElementById('mobile-menu').classList.add('hidden');
+});
+document.querySelectorAll('#mobile-menu a').forEach(link => {
+link.addEventListener('click', () => {
+document.getElementById('mobile-menu').classList.add('hidden');
+});
+});
+document.getElementById('search-input').addEventListener('input', filterDocuments);
+document.querySelectorAll('.category-chip').forEach(chip => {
+chip.addEventListener('click', (e) => {
+document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active', 'chip-pulse'));
+e.currentTarget.classList.add('active', 'chip-pulse');
+currentCategory = e.currentTarget.dataset.category;
+filterDocuments();
+});
+});
+document.getElementById('clear-filters').addEventListener('click', () => {
+document.getElementById('search-input').value = '';
+currentCategory = 'all';
+document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active', 'chip-pulse'));
+document.querySelector('.category-chip[data-category="all"]').classList.add('active', 'chip-pulse');
+filterDocuments();
+});
+document.getElementById('fab-main').addEventListener('click', toggleFab);
+document.getElementById('upload-btn').addEventListener('click', () => {
+showModal('upload-modal');
+toggleFab();
+});
+document.getElementById('logout-btn').addEventListener('click', logoutAdmin);
+document.getElementById('mobile-admin-btn').addEventListener('click', checkAdminUnlock);
+document.querySelectorAll('.modal-close').forEach(btn => {
+btn.addEventListener('click', (e) => {
+const modal = e.target.closest('[id$="-modal"]');
+hideModal(modal.id);
+});
+});
+document.getElementById('modal-overlay').addEventListener('click', () => {
+document.querySelectorAll('[id$="-modal"]').forEach(modal => {
+if (!modal.classList.contains('hidden')) hideModal(modal.id);
+});
+});
+document.getElementById('admin-login-form').addEventListener('submit', (e) => {
+e.preventDefault();
+const password = document.getElementById('admin-password').value;
+if (password === ADMIN_PASSWORD) {
+unlockAdmin();
+document.getElementById('admin-password').value = '';
+} else {
+showToast('Invalid password', 'error');
+document.getElementById('admin-password').value = '';
+}
+});
+document.getElementById('upload-form').addEventListener('submit', handleUpload);
+document.getElementById('doc-file').addEventListener('change', (e) => {
+const file = e.target.files[0];
+if (file) {
+document.getElementById('file-name').textContent = `Selected: ${file.name}`;
+}
+});
+const logo = document.getElementById('logo');
+logo.addEventListener('mousedown', () => {
+logoPressTimer = setTimeout(checkAdminUnlock, 3000);
+});
+logo.addEventListener('mouseup', () => clearTimeout(logoPressTimer));
+logo.addEventListener('mouseleave', () => clearTimeout(logoPressTimer));
+logo.addEventListener('touchstart', () => {
+logoPressTimer = setTimeout(checkAdminUnlock, 3000);
+});
+logo.addEventListener('touchend', () => clearTimeout(logoPressTimer));
+document.getElementById('footer').addEventListener('click', () => {
+footerTaps++;
+clearTimeout(footerTapTimer);
+if (footerTaps >= 7) {
+checkAdminUnlock();
+footerTaps = 0;
+} else {
+footerTapTimer = setTimeout(() => footerTaps = 0, 1000);
+}
+});
+document.addEventListener('keydown', (e) => {
+keySequence += e.key.toLowerCase();
+if (keySequence.includes('admin')) {
+checkAdminUnlock();
+keySequence = '';
+}
+if (keySequence.length > 10) keySequence = keySequence.slice(-10);
+});
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+});
+});
+}
+
+function init() {
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') document.body.classList.add('light');
+updateThemeIcon();
+initLanguages();
+initEventListeners();
+initParticles();
+animateParticles();
+typeWriter();
+fetchDocuments();
+fetchStats();
+window.addEventListener('resize', resizeCanvas);
+document.body.classList.add('page-transition');
+}
+
+document.addEventListener('DOMContentLoaded', init);
+window.deleteDocument = deleteDocument;
+window.incrementDownload = incrementDownload;
+</script>
+</body>
+</html>
