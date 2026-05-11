@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Group 9 - Member Registration System</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
+        min-height: 100vh;
+    }
+
+   .container {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+   .header {
+        background: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #48dbfb 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 20px 20px 0 0;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+   .header h1 {
+        font-size: 28px;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+   .main-content {
+        background: white;
+        padding: 30px;
+        border-radius: 0 0 20px 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+   .tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #e5e7eb;
+    }
+
+   .tab-btn {
+        padding: 12px 24px;
+        background: none;
+        border: none;
+        font-size: 16px;
+        font-weight: 600;
+        color: #6b7280;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s;
+    }
+
+   .tab-btn.active {
+        color: #667eea;
+        border-bottom-color: #667eea;
+    }
+
+   .tab-content {
+        display: none;
+    }
+
+   .tab-content.active {
+        display: block;
+        animation: fadeIn 0.4s;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+   .form-group {
+        margin-bottom: 20px;
+    }
+
+   .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #374151;
+    }
+
+   .form-group input,.form-group textarea {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        font-size: 15px;
+        font-family: 'Poppins', sans-serif;
+        transition: all 0.3s;
+    }
+
+   .form-group input:focus,.form-group textarea:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+   .btn {
+        padding: 14px 30px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+   .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+   .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    }
+
+   .btn-success {
+        background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+        color: white;
+    }
+
+   .btn-danger {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        color: white;
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+   .members-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+   .member-card {
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        border: 2px solid #e5e7eb;
+        border-radius: 15px;
+        padding: 20px;
+        transition: all 0.3s;
+        position: relative;
+    }
+
+   .member-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        border-color: #667eea;
+    }
+
+   .member-card h3 {
+        color: #667eea;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+   .member-card p {
+        color: #6b7280;
+        font-size: 14px;
+        margin: 5px 0;
+    }
+
+   .member-card.reg-number {
+        background: #667eea;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        display: inline-block;
+        margin-top: 8px;
+    }
+
+   .signature-box {
+        margin-top: 15px;
+        padding: 15px;
+        background: #f0f9ff;
+        border-radius: 10px;
+        border: 2px dashed #3b82f6;
+    }
+
+   .signature-status {
+        font-size: 13px;
+        color: #059669;
+        font-weight: 600;
+    }
+
+   .signature-status.unsigned {
+        color: #dc2626;
+    }
+
+   .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+    }
+
+   .modal.active {
+        display: flex;
+    }
+
+   .modal-content {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        max-width: 500px;
+        width: 90%;
+        animation: slideDown 0.3s;
+    }
+
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+   .signature-pad {
+        border: 3px solid #e5e7eb;
+        border-radius: 10px;
+        margin: 15px 0;
+        cursor: crosshair;
+        background: white;
+    }
+
+   .alert {
+        padding: 15px 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        display: none;
+    }
+
+   .alert.success {
+        background: #d1fae5;
+        color: #065f46;
+        border: 2px solid #10b981;
+    }
+
+   .alert.error {
+        background: #fee2e2;
+        color: #991b1b;
+        border: 2px solid #ef4444;
+    }
+
+   .alert.show {
+        display: block;
+    }
+
+   .loading {
+        text-align: center;
+        padding: 40px;
+        color: #6b7280;
+    }
+
+    @media (max-width: 768px) {
+       .members-grid { grid-template-columns: 1fr; }
+       .header h1 { font-size: 22px; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1><i class="fas fa-users"></i> Group 9 Member Registration</h1>
+        <p>Co-operative Management Studies - 2026</p>
+    </div>
+
+    <div class="main-content">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('register')">
+                <i class="fas fa-user-plus"></i> Sajili Mwanachama
+            </button>
+            <button class="tab-btn" onclick="switchTab('members')">
+                <i class="fas fa-list"></i> Orodha ya Wanachama
+            </button>
+        </div>
+
+        <div id="alertBox" class="alert"></div>
+
+        <!-- Tab 1: Registration Form -->
+        <div id="register" class="tab-content active">
+            <h2 style="margin-bottom: 20px; color: #374151;">
+                <i class="fas fa-pen-to-square"></i> Ongeza Mwanachama Mpya
+            </h2>
+            <form id="memberForm">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Jina Kamili *</label>
+                    <input type="text" id="fullName" placeholder="Mfano: John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-id-card"></i> Registration Number *</label>
+                    <input type="text" id="regNumber" placeholder="Mfano: CMS/2026/001" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email (Optional)</label>
+                    <input type="email" id="email" placeholder="john@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-phone"></i> Namba ya Simu (Optional)</label>
+                    <input type="tel" id="phone" placeholder="0712 345 678">
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Sajili Mwanachama
+                </button>
+            </form>
+        </div>
+
+        <!-- Tab 2: Members List -->
+        <div id="members" class="tab-content">
+            <h2 style="margin-bottom: 20px; color: #374151;">
+                <i class="fas fa-users"></i> Wanachama Waliosajiliwa
+            </h2>
+            <div id="membersList" class="loading">
+                <i class="fas fa-spinner fa-spin"></i> Inapakia...
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Signature Modal -->
+<div id="signatureModal" class="modal">
+    <div class="modal-content">
+        <h2 style="margin-bottom: 20px; color: #374151;">
+            <i class="fas fa-signature"></i> Weka Sahihi Yako
+        </h2>
+        <p style="color: #6b7280; margin-bottom: 15px;">Chora sahihi yako hapa chini:</p>
+        <canvas id="signaturePad" class="signature-pad" width="440" height="200"></canvas>
+        <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button class="btn btn-primary" onclick="saveSignature()">
+                <i class="fas fa-check"></i> Hifadhi Sahihi
+            </button>
+            <button class="btn" style="background: #e5e7eb;" onclick="clearSignature()">
+                <i class="fas fa-eraser"></i> Futa
+            </button>
+            <button class="btn" style="background: #e5e7eb;" onclick="closeSignatureModal()">
+                <i class="fas fa-times"></i> Funga
+            </button>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    // Firebase Configuration - TUMEWEKA PROJECT TOFAUTI NA CHAKULA
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getFirestore, collection, addDoc, getDocs, updateDoc, doc, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyA8NHrfgAwHQGA9bVtEdGbEZ-TcFk9bVYs",
+        authDomain: "chakula-2968b.firebaseapp.com",
+        projectId: "chakula-2968b",
+        storageBucket: "chakula-2968b.firebasestorage.app",
+        messagingSenderId: "24927230556",
+        appId: "1:24927230556:web:823dcfbe79885b022be499",
+        measurementId: "G-310T1T18EP"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Collection mpya - haitaingiliana na data ya "chakula"
+    const COLLECTION_NAME = "group9_members";
+
+    let currentMemberId = null;
+    let canvas, ctx, isDrawing = false;
+
+    // Initialize signature pad
+    window.addEventListener('DOMContentLoaded', () => {
+        canvas = document.getElementById('signaturePad');
+        ctx = canvas.getContext('2d');
+        ctx.strokeStyle = '#000';
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('touchstart', startDrawing);
+        canvas.addEventListener('touchmove', draw);
+        canvas.addEventListener('touchend', stopDrawing);
+
+        loadMembers();
+    });
+
+    function startDrawing(e) {
+        isDrawing = true;
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX || e.touches[0].clientX) - rect.left;
+        const y = (e.clientY || e.touches[0].clientY) - rect.top;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+    }
+
+    function draw(e) {
+        if (!isDrawing) return;
+        e.preventDefault();
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX || e.touches[0].clientX) - rect.left;
+        const y = (e.clientY || e.touches[0].clientY) - rect.top;
+        ctx.lineTo(x, y);
+        ctx.stroke();
+    }
+
+    function stopDrawing() {
+        isDrawing = false;
+    }
+
+    window.clearSignature = function() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    window.closeSignatureModal = function() {
+        document.getElementById('signatureModal').classList.remove('active');
+        clearSignature();
+    }
+
+    window.saveSignature = async function() {
+        const signatureData = canvas.toDataURL();
+
+        try {
+            await updateDoc(doc(db, COLLECTION_NAME, currentMemberId), {
+                signature: signatureData,
+                signedAt: new Date().toISOString()
+            });
+            showAlert('Sahihi imehifadhiwa kikamilifu!', 'success');
+            closeSignatureModal();
+            loadMembers();
+        } catch (error) {
+            showAlert('Hitilafu: ' + error.message, 'error');
+        }
+    }
+
+    window.openSignatureModal = function(memberId) {
+        currentMemberId = memberId;
+        document.getElementById('signatureModal').classList.add('active');
+    }
+
+    // Tab switching
+    window.switchTab = function(tabName) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+        event.target.classList.add('active');
+        document.getElementById(tabName).classList.add('active');
+
+        if (tabName === 'members') {
+            loadMembers();
+        }
+    }
+
+    // Form submission
+    document.getElementById('memberForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const memberData = {
+            fullName: document.getElementById('fullName').value,
+            regNumber: document.getElementById('regNumber').value,
+            email: document.getElementById('email').value || null,
+            phone: document.getElementById('phone').value || null,
+            signature: null,
+            signedAt: null,
+            registeredAt: new Date().toISOString()
+        };
+
+        try {
+            await addDoc(collection(db, COLLECTION_NAME), memberData);
+            showAlert('Mwanachama amesajiliwa kikamilifu!', 'success');
+            document.getElementById('memberForm').reset();
+            loadMembers();
+        } catch (error) {
+            showAlert('Hitilafu: ' + error.message, 'error');
+        }
+    });
+
+    // Load members
+    async function loadMembers() {
+        const membersList = document.getElementById('membersList');
+        membersList.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> Inapakia...</div>';
+
+        try {
+            const q = query(collection(db, COLLECTION_NAME), orderBy('registeredAt', 'desc'));
+            const querySnapshot = await getDocs(q);
+
+            if (querySnapshot.empty) {
+                membersList.innerHTML = '<p style="text-align:center; color:#6b7280;">Hakuna wanachama waliosajiliwa bado.</p>';
+                return;
+            }
+
+            let html = '<div class="members-grid">';
+            querySnapshot.forEach((doc) => {
+                const member = doc.data();
+                const hasSignature = member.signature!== null;
+
+                html += `
+                    <div class="member-card">
+                        <h3><i class="fas fa-user-circle"></i> ${member.fullName}</h3>
+                        <p><i class="fas fa-id-card"></i> <strong>Reg No:</strong> ${member.regNumber}</p>
+                        ${member.email? `<p><i class="fas fa-envelope"></i> ${member.email}</p>` : ''}
+                        ${member.phone? `<p><i class="fas fa-phone"></i> ${member.phone}</p>` : ''}
+                        <div class="signature-box">
+                            <p class="signature-status ${hasSignature? '' : 'unsigned'}">
+                                <i class="fas fa-${hasSignature? 'check-circle' : 'times-circle'}"></i>
+                                ${hasSignature? 'Amesaini - ' + new Date(member.signedAt).toLocaleDateString() : 'Hajasaini'}
+                            </p>
+                            ${!hasSignature? `
+                                <button class="btn btn-success" style="margin-top:10px; width:100%;" onclick="openSignatureModal('${doc.id}')">
+                                    <i class="fas fa-signature"></i> Bofya Kusaini
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            membersList.innerHTML = html;
+        } catch (error) {
+            membersList.innerHTML = `<p style="color:#dc2626;">Hitilafu: ${error.message}</p>`;
+        }
+    }
+
+    function showAlert(message, type) {
+        const alertBox = document.getElementById('alertBox');
+        alertBox.className = `alert ${type} show`;
+        alertBox.innerHTML = `<i class="fas fa-${type === 'success'? 'check-circle' : 'exclamation-circle'}"></i> ${message}`;
+
+        setTimeout(() => {
+            alertBox.classList.remove('show');
+        }, 4000);
+    }
+</script>
+
+</body>
+</html>
