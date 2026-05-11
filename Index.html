@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Group 9 - Co-operative Management Portal</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    .container {
+        max-width: 1000px;
+        width: 100%;
+    }
+    
+    .cover-card {
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 30px;
+        box-shadow: 0 25px 70px rgba(0,0,0,0.3);
+        overflow: hidden;
+        animation: slideUp 0.6s ease-out;
+    }
+    
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .cover-header {
+        background: linear-gradient(135deg, #ff6b6b 0%, #feca57 25%, #48dbfb 50%, #ff9ff3 75%, #54a0ff 100%);
+        background-size: 300% 300%;
+        animation: headerGradient 8s ease infinite;
+        padding: 50px 40px;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    @keyframes headerGradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    .cover-header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+        animation: rotate 20s linear infinite;
+    }
+    
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    
+    .cover-header h1 {
+        font-size: 42px;
+        font-weight: 800;
+        margin-bottom: 15px;
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+        position: relative;
+        z-index: 1;
+    }
+    
+    .cover-header p {
+        font-size: 18px;
+        opacity: 0.95;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .cover-header .badge {
+        display: inline-block;
+        background: rgba(255,255,255,0.25);
+        padding: 8px 20px;
+        border-radius: 25px;
+        margin-top: 15px;
+        font-size: 14px;
+        font-weight: 600;
+        backdrop-filter: blur(10px);
+        position: relative;
+        z-index: 1;
+    }
+    
+    .cover-body {
+        padding: 50px 40px;
+    }
+    
+    .intro-text {
+        text-align: center;
+        color: #4b5563;
+        font-size: 16px;
+        margin-bottom: 40px;
+        line-height: 1.8;
+    }
+    
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+    
+    .nav-card {
+        background: white;
+        border-radius: 20px;
+        padding: 35px 30px;
+        text-decoration: none;
+        color: inherit;
+        border: 3px solid transparent;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+    }
+    
+    .nav-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        transition: height 0.3s ease;
+    }
+    
+    .nav-card:hover::before {
+        height: 100%;
+        opacity: 0.05;
+    }
+    
+    .nav-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    
+    /* Card 1 - Registration - Nyekundu/Machungwa */
+    .nav-card:nth-child(1) {
+        border-color: #e74c3c;
+    }
+    .nav-card:nth-child(1)::before {
+        background: linear-gradient(135deg, #e74c3c, #f39c12);
+    }
+    .nav-card:nth-child(1) .icon-box {
+        background: linear-gradient(135deg, #e74c3c, #f39c12);
+    }
+    .nav-card:nth-child(1):hover {
+        border-color: #f39c12;
+    }
+    
+    /* Card 2 - Maswali - Bluu/Kijani */
+    .nav-card:nth-child(2) {
+        border-color: #3498db;
+    }
+    .nav-card:nth-child(2)::before {
+        background: linear-gradient(135deg, #3498db, #2ecc71);
+    }
+    .nav-card:nth-child(2) .icon-box {
+        background: linear-gradient(135deg, #3498db, #2ecc71);
+    }
+    .nav-card:nth-child(2):hover {
+        border-color: #2ecc71;
+    }
+    
+    .icon-box {
+        width: 80px;
+        height: 80px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 36px;
+        color: white;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        transition: transform 0.3s ease;
+    }
+    
+    .nav-card:hover .icon-box {
+        transform: rotateY(360deg);
+    }
+    
+    .nav-card h2 {
+        font-size: 22px;
+        color: #1f2937;
+        margin-bottom: 12px;
+        font-weight: 700;
+    }
+    
+    .nav-card p {
+        color: #6b7280;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+    
+    .nav-card .btn-arrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #667eea;
+        font-weight: 600;
+        font-size: 14px;
+        transition: gap 0.3s ease;
+    }
+    
+    .nav-card:hover .btn-arrow {
+        gap: 12px;
+    }
+    
+    .footer {
+        text-align: center;
+        padding: 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        font-size: 14px;
+    }
+    
+    .footer i {
+        color: #ffeaa7;
+    }
+    
+    @media (max-width: 768px) {
+        .cover-header h1 { font-size: 32px; }
+        .cover-header p { font-size: 16px; }
+        .cover-body { padding: 30px 20px; }
+        .cards-grid { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="cover-card">
+        <div class="cover-header">
+            <h1><i class="fas fa-graduation-cap"></i> GROUP 9 PORTAL</h1>
+            <p>Co-operative Management Studies 2026</p>
+            <div class="badge">
+                <i class="fas fa-star"></i> Karibu Sana
+            </div>
+        </div>
+
+        <div class="cover-body">
+            <div class="intro-text">
+                <strong>Chagua sehemu unayotaka kuingia:</strong><br>
+                Unaweza kusajili wanachama wapya au kusoma maswali na majibu ya Co-operative Decision Making
+            </div>
+
+            <div class="cards-grid">
+                <!-- Card 1: Registration -->
+                <a href="registration.html" class="nav-card">
+                    <div class="icon-box">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h2>Usajili wa Wanachama</h2>
+                    <p>Sajili wanachama wapya wa group, weka jina, registration number, na sahihi ya kidijitali.</p>
+                    <span class="btn-arrow">
+                        Ingia Sasa <i class="fas fa-arrow-right"></i>
+                    </span>
+                </a>
+
+                <!-- Card 2: Maswali -->
+                <a href="maswali.html" class="nav-card">
+                    <div class="icon-box">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h2>Maswali & Majibu</h2>
+                    <p>Soma maelezo ya kina kuhusu jinsi maamuzi yanavyofanyika katika Co-operatives - Point 10.</p>
+                    <span class="btn-arrow">
+                        Soma Sasa <i class="fas fa-arrow-right"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><i class="fas fa-heart"></i> &copy; 2026 Group 9 - Co-operative Management Studies</p>
+        </div>
+    </div>
+</div>
+
+</body>
+                      </html>
