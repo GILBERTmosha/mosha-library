@@ -1,12 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sw">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Co-operative Decision Making - 10 Points</title>
+
+<!-- SEO Meta Tags - HII NDIO ITAKAYOFANYA IPATIKANE GOOGLE -->
+<title>Good Group Number 9 - MOCU | Co-operative Management Portal</title>
+<meta name="description" content="Good Group Number 9 MOCU - Moshi Co-operative University. Member registration portal na maswali ya Co-operative Decision Making. Co-operative Management Studies 2026.">
+<meta name="keywords" content="Good Group Number 9, MOCU, Moshi Co-operative University, Group 9 MOCU, Co-operative Management, Group Number 9, MOCU Group 9, Ushirika MOCU, Co-operative Decision Making">
+<meta name="author" content="Group 9 - MOCU">
+
+<!-- Open Graph kwa Social Media -->
+<meta property="og:title" content="Good Group Number 9 - MOCU Portal">
+<meta property="og:description" content="Co-operative Management Studies Portal - Member Registration & Study Materials">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MOCU Group 9">
+
+<!-- Robots -->
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
     
     * {
         margin: 0;
@@ -16,13 +32,14 @@
     
     body {
         font-family: 'Poppins', sans-serif;
-        line-height: 1.7;
-        color: #2d3748;
+        min-height: 100vh;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
         background-size: 400% 400%;
         animation: gradientShift 15s ease infinite;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 20px;
-        min-height: 100vh;
     }
     
     @keyframes gradientShift {
@@ -31,28 +48,31 @@
         100% { background-position: 0% 50%; }
     }
     
-    .main-container {
-        background-color: #fff;
-        max-width: 950px;
-        margin: 0 auto;
-        padding: 0;
-        border-radius: 20px;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-        overflow: hidden;
-        animation: fadeIn 0.6s ease-out;
+    .container {
+        max-width: 1000px;
+        width: 100%;
     }
     
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
+    .cover-card {
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 30px;
+        box-shadow: 0 25px 70px rgba(0,0,0,0.3);
+        overflow: hidden;
+        animation: slideUp 0.6s ease-out;
+    }
+    
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(40px); }
         to { opacity: 1; transform: translateY(0); }
     }
     
-    .question-header {
+    .cover-header {
         background: linear-gradient(135deg, #ff6b6b 0%, #feca57 25%, #48dbfb 50%, #ff9ff3 75%, #54a0ff 100%);
         background-size: 300% 300%;
         animation: headerGradient 8s ease infinite;
-        color: #ffffff;
-        padding: 35px 40px;
+        padding: 50px 40px;
+        text-align: center;
+        color: white;
         position: relative;
         overflow: hidden;
     }
@@ -63,323 +83,264 @@
         100% { background-position: 0% 50%; }
     }
     
-    .question-header::after {
+    .cover-header::before {
         content: '';
         position: absolute;
         top: -50%;
-        right: -50%;
+        left: -50%;
         width: 200%;
         height: 200%;
-        background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+        animation: rotate 20s linear infinite;
     }
     
-    .question-header h1 {
-        font-size: 26px;
-        font-weight: 700;
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    
+    .cover-header h1 {
+        font-size: 42px;
+        font-weight: 800;
+        margin-bottom: 15px;
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
         position: relative;
         z-index: 1;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     }
     
-    .question-header h1 i {
-        font-size: 32px;
-        animation: bounce 2s infinite;
+    .cover-header p {
+        font-size: 18px;
+        opacity: 0.95;
+        position: relative;
+        z-index: 1;
     }
     
-    @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-5px); }
+    .cover-header .badge {
+        display: inline-block;
+        background: rgba(255,255,255,0.25);
+        padding: 8px 20px;
+        border-radius: 25px;
+        margin-top: 15px;
+        font-size: 14px;
+        font-weight: 600;
+        backdrop-filter: blur(10px);
+        position: relative;
+        z-index: 1;
     }
     
-    .content-wrapper {
-        padding: 40px;
+    .cover-body {
+        padding: 50px 40px;
     }
     
     .intro-text {
-        background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
-        border-left: 5px solid #e17055;
-        padding: 18px 22px;
-        border-radius: 12px;
-        margin-bottom: 35px;
-        font-size: 0.98em;
-        color: #2d3436;
-        box-shadow: 0 4px 15px rgba(225, 112, 85, 0.2);
+        text-align: center;
+        color: #4b5563;
+        font-size: 16px;
+        margin-bottom: 40px;
+        line-height: 1.8;
     }
     
-    .points-grid {
+    .cards-grid {
         display: grid;
-        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
     }
     
-    .point {
-        background: #ffffff;
-        padding: 22px;
-        border-radius: 16px;
-        border: 2px solid transparent;
-        transition: all 0.4s ease;
-        animation: slideUp 0.5s ease-out backwards;
+    .nav-card {
+        background: white;
+        border-radius: 20px;
+        padding: 35px 30px;
+        text-decoration: none;
+        color: inherit;
+        border: 3px solid transparent;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         position: relative;
         overflow: hidden;
+        cursor: pointer;
     }
     
-    .point::before {
+    .nav-card::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
-        width: 6px;
-        height: 100%;
-        transition: width 0.3s ease;
-    }
-    
-    .point:hover::before {
         width: 100%;
-        opacity: 0.08;
+        height: 6px;
+        transition: height 0.3s ease;
     }
     
-    .point:hover {
-        transform: translateY(-5px) scale(1.02);
-        box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    .nav-card:hover::before {
+        height: 100%;
+        opacity: 0.05;
     }
     
-    /* Rangi tofauti kwa kila point */
-    .point:nth-child(1) { border-color: #e74c3c; }
-    .point:nth-child(1)::before { background: #e74c3c; }
-    .point:nth-child(1) .point-number { background: linear-gradient(135deg, #e74c3c, #c0392b); }
-    .point:nth-child(1) .point-icon { color: #e74c3c; }
-    
-    .point:nth-child(2) { border-color: #3498db; }
-    .point:nth-child(2)::before { background: #3498db; }
-    .point:nth-child(2) .point-number { background: linear-gradient(135deg, #3498db, #2980b9); }
-    .point:nth-child(2) .point-icon { color: #3498db; }
-    
-    .point:nth-child(3) { border-color: #2ecc71; }
-    .point:nth-child(3)::before { background: #2ecc71; }
-    .point:nth-child(3) .point-number { background: linear-gradient(135deg, #2ecc71, #27ae60); }
-    .point:nth-child(3) .point-icon { color: #2ecc71; }
-    
-    .point:nth-child(4) { border-color: #f39c12; }
-    .point:nth-child(4)::before { background: #f39c12; }
-    .point:nth-child(4) .point-number { background: linear-gradient(135deg, #f39c12, #e67e22); }
-    .point:nth-child(4) .point-icon { color: #f39c12; }
-    
-    .point:nth-child(5) { border-color: #9b59b6; }
-    .point:nth-child(5)::before { background: #9b59b6; }
-    .point:nth-child(5) .point-number { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
-    .point:nth-child(5) .point-icon { color: #9b59b6; }
-    
-    .point:nth-child(6) { border-color: #1abc9c; }
-    .point:nth-child(6)::before { background: #1abc9c; }
-    .point:nth-child(6) .point-number { background: linear-gradient(135deg, #1abc9c, #16a085); }
-    .point:nth-child(6) .point-icon { color: #1abc9c; }
-    
-    .point:nth-child(7) { border-color: #e67e22; }
-    .point:nth-child(7)::before { background: #e67e22; }
-    .point:nth-child(7) .point-number { background: linear-gradient(135deg, #e67e22, #d35400); }
-    .point:nth-child(7) .point-icon { color: #e67e22; }
-    
-    .point:nth-child(8) { border-color: #34495e; }
-    .point:nth-child(8)::before { background: #34495e; }
-    .point:nth-child(8) .point-number { background: linear-gradient(135deg, #34495e, #2c3e50); }
-    .point:nth-child(8) .point-icon { color: #34495e; }
-    
-    .point:nth-child(9) { border-color: #16a085; }
-    .point:nth-child(9)::before { background: #16a085; }
-    .point:nth-child(9) .point-number { background: linear-gradient(135deg, #16a085, #1abc9c); }
-    .point:nth-child(9) .point-icon { color: #16a085; }
-    
-    .point:nth-child(10) { border-color: #d63031; }
-    .point:nth-child(10)::before { background: #d63031; }
-    .point:nth-child(10) .point-number { background: linear-gradient(135deg, #d63031, #c0392b); }
-    .point:nth-child(10) .point-icon { color: #d63031; }
-    
-    .point:nth-child(1) { animation-delay: 0.1s; }
-    .point:nth-child(2) { animation-delay: 0.15s; }
-    .point:nth-child(3) { animation-delay: 0.2s; }
-    .point:nth-child(4) { animation-delay: 0.25s; }
-    .point:nth-child(5) { animation-delay: 0.3s; }
-    .point:nth-child(6) { animation-delay: 0.35s; }
-    .point:nth-child(7) { animation-delay: 0.4s; }
-    .point:nth-child(8) { animation-delay: 0.45s; }
-    .point:nth-child(9) { animation-delay: 0.5s; }
-    .point:nth-child(10) { animation-delay: 0.55s; }
-    
-    @keyframes slideUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+    .nav-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     }
     
-    .point-header {
-        display: flex;
-        align-items: flex-start;
-        gap: 16px;
-        margin-bottom: 12px;
+    .nav-card:nth-child(1) {
+        border-color: #e74c3c;
+    }
+    .nav-card:nth-child(1)::before {
+        background: linear-gradient(135deg, #e74c3c, #f39c12);
+    }
+    .nav-card:nth-child(1) .icon-box {
+        background: linear-gradient(135deg, #e74c3c, #f39c12);
     }
     
-    .point-number {
-        color: white;
-        min-width: 42px;
-        height: 42px;
-        border-radius: 12px;
+    .nav-card:nth-child(2) {
+        border-color: #3498db;
+    }
+    .nav-card:nth-child(2)::before {
+        background: linear-gradient(135deg, #3498db, #2ecc71);
+    }
+    .nav-card:nth-child(2) .icon-box {
+        background: linear-gradient(135deg, #3498db, #2ecc71);
+    }
+    
+    .icon-box {
+        width: 80px;
+        height: 80px;
+        border-radius: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
+        font-size: 36px;
+        color: white;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        transition: transform 0.3s ease;
+    }
+    
+    .nav-card:hover .icon-box {
+        transform: rotateY(360deg);
+    }
+    
+    .nav-card h2 {
+        font-size: 22px;
+        color: #1f2937;
+        margin-bottom: 12px;
         font-weight: 700;
-        font-size: 1.1em;
-        flex-shrink: 0;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
     
-    .point-title {
+    .nav-card p {
+        color: #6b7280;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+    
+    .nav-card .btn-arrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #667eea;
         font-weight: 600;
-        color: #2d3436;
-        font-size: 1.1em;
-        line-height: 1.4;
+        font-size: 14px;
+        transition: gap 0.3s ease;
     }
     
-    .point-icon {
-        margin-right: 8px;
-        font-size: 1.2em;
-    }
-    
-    .explanation {
-        margin-left: 58px;
-        color: #636e72;
-        font-size: 0.96em;
-        line-height: 1.7;
+    .nav-card:hover .btn-arrow {
+        gap: 12px;
     }
     
     .footer {
-        margin-top: 40px;
-        padding: 30px 40px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         text-align: center;
-        font-size: 0.95em;
+        padding: 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
+        font-size: 14px;
     }
     
     .footer i {
         color: #ffeaa7;
-        margin-right: 5px;
+    }
+    
+    .search-tags {
+        text-align: center;
+        margin-top: 20px;
+        padding: 15px;
+        background: #f9fafb;
+        border-radius: 15px;
+    }
+    
+    .search-tags span {
+        display: inline-block;
+        background: #e5e7eb;
+        color: #4b5563;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 12px;
+        margin: 4px;
     }
     
     @media (max-width: 768px) {
-        body { padding: 10px; }
-        .content-wrapper { padding: 25px 20px; }
-        .question-header { padding: 25px 20px; }
-        .question-header h1 { font-size: 20px; }
-        .explanation { margin-left: 0; margin-top: 10px; }
-        .point-header { flex-direction: column; gap: 12px; }
-    }
-    
-    @media print {
-        body { background: white; padding: 0; animation: none; }
-        .main-container { box-shadow: none; }
-        .question-header { animation: none; }
-        .point:hover { transform: none; box-shadow: none; }
+        .cover-header h1 { font-size: 32px; }
+        .cover-header p { font-size: 16px; }
+        .cover-body { padding: 30px 20px; }
+        .cards-grid { grid-template-columns: 1fr; }
     }
 </style>
 </head>
 <body>
 
-<div class="main-container">
-    <div class="question-header">
-        <h1><i class="fas fa-users-gear"></i> Question 9: Explain how decision-making is carried out in Co-operatives</h1>
-    </div>
-
-    <div class="content-wrapper">
-        <div class="intro-text">
-            <strong><i class="fas fa-lightbulb"></i> Key Concept:</strong> Co-operative decision-making is based on democratic principles where members have equal power regardless of their financial contribution.
-        </div>
-
-        <div class="points-grid">
-            <div class="point">
-                <div class="point-header">
-                    <div class="point-number">1</div>
-                    <div class="point-title"><i class="fas fa-vote-yea point-icon"></i>Democratic Member Control</div>
-                </div>
-                <div class="explanation">Decision-making is fundamentally democratic. Co-operatives are controlled by their members who actively participate in setting policies and making key decisions.</div>
-            </div>
-
-            <div class="point">
-                <div class="point-header">
-                    <div class="point-number">2</div>
-                    <div class="point-title"><i class="fas fa-user-check point-icon"></i>One Member, One Vote Principle</div>
-                </div>
-                <div class="explanation">This is the core of co-operative governance. Regardless of the amount of capital or shares a member contributes, each person has exactly one vote, ensuring equality.</div>
-            </div>
-
-            <div class="point">
-                <div class="point-header">
-                    <div class="point-number">3</div>
-                    <div class="point-title"><i class="fas fa-people-group point-icon"></i>The General Meeting (Supreme Authority)</div>
-                </div>
-                <div class="explanation">Major decisions are made at the Annual General Meeting (AGM) or Special General Meetings. This is where members exercise their ultimate power to approve budgets and plans.</div>
-            </div>
-
-            <div class="point">
-                <div class="point-header">
-                    <div class="point-number">4</div>
-                    <div class="point-title"><i class="fas fa-user-tie point-icon"></i>Election of the Board of Directors</div>
-                </div>
-                <div class="explanation">Members make decisions by electing a Board of Directors from among themselves. This board acts as the representative body to oversee the co-operative's interests.</div>
-            </div>
-
-            <div class="point">
-                <div class="point-header">
-                    <div class="point-number">5</div>
-                    <div class="point-title"><i class="fas fa-chess point-icon"></i>Policy Formulation by the Board</div>
-                </div>
-                <div class="explanation">The Board of Directors is responsible for making strategic and policy-level decisions. They set the long-term goals and ensure the co-operative stays true to its mission.</div>
-            </div>
-
-            <div class="point">
-                <div class="point-header">
-                    <div class="point-number">6</div>
-                    <div class="point-title"><i class="fas fa-briefcase point-icon"></i>Delegation to Management</div>
-                </div>
-                <div class="explanation">For daily operations, decisions are delegated to professional managers or staff. This ensures that technical and routine tasks are handled efficiently by experts.</div>
-            </div>
-
-            <div class="point">
-                <div class="point-header">
-                    <div class="point-number">7</div>
-                    <div class="point-title"><i class="fas fa-clipboard-check point-icon"></i>Accountability to Members</div>
-                </div>
-                <div class="explanation">Decision-making includes a feedback loop. The Board and Management must report their actions and results back to the members for review and approval.</div>
-            </div>
-
-            <div class="point">
-                <div class="point-header">
-                    <div class="point-number">8</div>
-                    <div class="point-title"><i class="fas fa-users-between-lines point-icon"></i>Use of Specialized Committees</div>
-                </div>
-                <div class="explanation">Many co-operatives form sub-committees (e.g., Audit or Education committees) to research specific issues and provide recommendations before a final decision is made.</div>
-            </div>
-
-            <div class="point">
-                <div class="point-header">
-                    <div class="point-number">9</div>
-                    <div class="point-title"><i class="fas fa-scale-balanced point-icon"></i>Compliance with Bylaws and Laws</div>
-                </div>
-                <div class="explanation">All decisions must be made within the framework of the co-operative's own bylaws and the national laws governing co-operative societies.</div>
-            </div>
-
-            <div class="point">
-                <div class="point-header">
-                    <div class="point-number">10</div>
-                    <div class="point-title"><i class="fas fa-hand point-icon"></i>Majority Rule</div>
-                </div>
-                <div class="explanation">Most decisions are finalized through a majority vote. For critical issues like merging or dissolving the co-operative, a higher threshold (like a two-thirds majority) is often required.</div>
+<div class="container">
+    <div class="cover-card">
+        <div class="cover-header">
+            <h1><i class="fas fa-graduation-cap"></i> GOOD GROUP NUMBER 9</h1>
+            <p>Moshi Co-operative University (MOCU)</p>
+            <div class="badge">
+                <i class="fas fa-star"></i> Co-operative Management Studies 2026
             </div>
         </div>
-    </div>
 
-    <div class="footer">
-        <p><i class="fas fa-graduation-cap"></i> &copy; 2026 Co-operative Management Studies - Group 9</p>
+        <div class="cover-body">
+            <div class="intro-text">
+                <strong>Karibu kwenye Portal ya Group Number 9 - MOCU</strong><br>
+                Chagua sehemu unayotaka kuingia: Sajili wanachama wapya au soma maswali ya Co-operative Decision Making
+            </div>
+
+            <div class="cards-grid">
+                <!-- Card 1: Registration -->
+                <a href="registration.html" class="nav-card">
+                    <div class="icon-box">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h2>Usajili wa Wanachama</h2>
+                    <p>Sajili wanachama wapya wa Group 9 MOCU, weka jina, registration number, na sahihi ya kidijitali.</p>
+                    <span class="btn-arrow">
+                        Ingia Sasa <i class="fas fa-arrow-right"></i>
+                    </span>
+                </a>
+
+                <!-- Card 2: Maswali -->
+                <a href="maswali.html" class="nav-card">
+                    <div class="icon-box">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h2>Maswali & Majibu</h2>
+                    <p>Soma maelezo ya kina kuhusu jinsi maamuzi yanavyofanyika katika Co-operatives - Point 10.</p>
+                    <span class="btn-arrow">
+                        Soma Sasa <i class="fas fa-arrow-right"></i>
+                    </span>
+                </a>
+            </div>
+
+            <div class="search-tags">
+                <strong style="display: block; margin-bottom: 10px; color: #374151;">Tafuta kwa:</strong>
+                <span>Good Group Number 9</span>
+                <span>MOCU Group 9</span>
+                <span>Moshi Co-operative University</span>
+                <span>Co-operative Management</span>
+                <span>Group 9 MOCU</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><i class="fas fa-heart"></i> &copy; 2026 Good Group Number 9 - MOCU | Co-operative Management Studies</p>
+        </div>
     </div>
 </div>
 
